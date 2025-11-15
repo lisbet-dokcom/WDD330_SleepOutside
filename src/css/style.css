@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -166,6 +166,14 @@ button {
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
+}
+
+/* Style for the discount */
+.discount {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
 }
 
 /* Styles for product lists */
