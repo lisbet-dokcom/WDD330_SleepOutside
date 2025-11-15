@@ -19,7 +19,7 @@ export default class ProductDetails {
       .addEventListener('click', this.addProductToCart.bind(this));
   }
 
-addProductToCart() {
+  addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || []; // get cart array of items from local storage if null set to empty array
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
@@ -36,12 +36,19 @@ addProductToCart() {
       productImage.src = product.Image;
       productImage.alt = product.NameWithoutBrand;
     }
+    document.querySelector(".product-card__price").textContent = `$${product.FinalPrice}`;
+    
+    const finalPrice = product.FinalPrice;
+    const suggesstedPrice = product.SuggestedRetailPrice;
 
-    document.querySelector(".product-card__price").textContent = product.FinalPrice;
+    const discountAmount = suggesstedPrice - finalPrice;
+    const discountPercentate = Math.round(
+      ((discountAmount / suggesstedPrice) * 100)
+    )
+
+    document.querySelector(".discount").textContent = `There is a ${discountPercentate}% OFF on this product`;
     document.querySelector(".product__color").textContent = product.Colors[0].ColorName;
     document.querySelector(".product__description").innerHTML = product.DescriptionHtmlSimple;
     document.querySelector(".product-detail__add").dataset.id = product.Id;
   }
 };
-
-
