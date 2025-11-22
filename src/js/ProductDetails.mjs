@@ -15,7 +15,7 @@ export default class ProductDetails {
     this.renderProductDetails();
 
     // 3. Attach event listener
-    document.getElementById('addToCart')
+    document.querySelector("#add-to-Cart")
       .addEventListener('click', this.addProductToCart.bind(this));
   }
 
@@ -28,27 +28,44 @@ export default class ProductDetails {
   renderProductDetails() {
     const product = this.product;
 
-    document.querySelector("h2").textContent = product.Brand.Name;
-    document.querySelector("h3").textContent = product.NameWithoutBrand;
+    document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
+    document.querySelector("#p-brand").textContent = product.Brand.Name;
+    document.querySelector("#p-name").textContent = product.NameWithoutBrand;
 
-    const productImage = document.getElementById("img");
-    if (productImage) {
-      productImage.src = product.Image;
-      productImage.alt = product.NameWithoutBrand;
-    }
-    document.querySelector(".product-card__price").textContent = `$${product.FinalPrice}`;
-    
-    const finalPrice = product.FinalPrice;
-    const suggesstedPrice = product.SuggestedRetailPrice;
+    const productImage = document.querySelector("#p-image");
+    productImage.src = product.Images.PrimaryExtraLarge;
+    productImage.alt = product.NameWithoutBrand;
+    const euroPrice = new Intl.NumberFormat('de-DE',
+      {
+        style: 'currency', currency: 'EUR',
+      }).format(Number(product.FinalPrice) * 0.85);
+    document.getElementById("#p-price").textContent = `${euroPrice}`;
+    document.querySelector("#p-color").textContent = product.Colors[0].ColorName;
+    document.querySelector("#p-description").innerHTML = product.DescriptionHtmlSimple;
+    document.querySelector("#add-to-cart").dataset.id = product.Id;
 
-    const discountAmount = suggesstedPrice - finalPrice;
-    const discountPercentate = Math.round(
-      ((discountAmount / suggesstedPrice) * 100)
-    )
+    // document.querySelector(".discount").textContent = `There is a ${discountPercentate}% OFF on this product`;
+    // document.querySelector(".product__color").textContent = product.Colors[0].ColorName;
+    // document.querySelector(".product__description").innerHTML = product.DescriptionHtmlSimple;
+    // document.querySelector(".product-detail__add").dataset.id = product.Id;
 
-    document.querySelector(".discount").textContent = `There is a ${discountPercentate}% OFF on this product`;
-    document.querySelector(".product__color").textContent = product.Colors[0].ColorName;
-    document.querySelector(".product__description").innerHTML = product.DescriptionHtmlSimple;
-    document.querySelector(".product-detail__add").dataset.id = product.Id;
   }
 };
+
+// document.querySelector("h2").textContent = product.Brand.Name;
+//     document.querySelector("h3").textContent = product.NameWithoutBrand;
+
+//     const productImage = document.getElementById("img");
+//     if (productImage) {
+//       productImage.src = product.Image.PrimaryExtraLarge;
+//       productImage.alt = product.NameWithoutBrand;
+//     }
+//     document.querySelector(".product-card__price").textContent = `$${product.FinalPrice}`;
+
+//     const finalPrice = product.FinalPrice;
+//     const suggesstedPrice = product.SuggestedRetailPrice;
+
+//     const discountAmount = suggesstedPrice - finalPrice;
+//     const discountPercentate = Math.round(
+//       ((discountAmount / suggesstedPrice) * 100)
+//     )

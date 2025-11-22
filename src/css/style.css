@@ -185,6 +185,20 @@ button {
   max-width: 250px;
 }
 
+/*Product grid */
+.product-grid {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.product-grid a {
+  text-decoration: none;
+}
+
+.product-grid li {
+  list-style-type: none;
+}
+
 .product-card h2,
 .product-card h3,
 .product-card p {
