@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, getParam } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -15,7 +15,7 @@ export default class ProductDetails {
     this.renderProductDetails();
 
     // 3. Attach event listener
-    document.getElementById("add-to-Cart")
+    document.querySelector("#addToCart")
       .addEventListener('click', this.addProductToCart.bind(this));
   }
 
@@ -45,7 +45,7 @@ export default class ProductDetails {
     document.querySelector("#p-description").innerHTML =
       product.DescriptionHtmlSimple;
 
-    document.querySelector("#add-to-cart").dataset.id = product.Id;
+    document.querySelector("#addToCart").dataset.id = product.Id;
 
     // document.querySelector(".discount").textContent = `There is a ${discountPercentate}% OFF on this product`;
     // document.querySelector(".product__color").textContent = product.Colors[0].ColorName;
